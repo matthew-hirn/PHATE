@@ -1,4 +1,4 @@
-function Y = randPCAdvd(X, k)
+function Y = randPCAproj(X, k)
 
 X = X';
 X = bsxfun(@minus,X,mean(X,2));

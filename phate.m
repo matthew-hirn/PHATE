@@ -35,7 +35,7 @@ end
 disp '======= PHATE ======='
 
 disp 'fast random PCA'
-M = randPCAdvd(data, npca);
+M = randPCAproj(data, npca);
 
 disp 'computing distances'
 PDX = squareform(pdist(M));
@@ -72,14 +72,14 @@ switch symm
         disp 'potential recovery'
         X(X<=eps)=eps;
         X = -log(X);
-        X = randPCAdvd(X, npca); % to make pdist faster?
+        X = randPCAproj(X, npca); % to make pdist faster?
         X = squareform(pdist(X));
 end
 
 switch mds_method
     case 'cmds_fast'
         disp 'fast random CMDS -- not working properly for mds'
-        Y = randPCAdvd(X, ndim);
+        Y = randPCAproj(X, ndim);
     case 'cmds'
         disp 'CMDS'
         Y = cmdscale(X, ndim);
