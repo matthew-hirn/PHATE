@@ -1,4 +1,4 @@
-function [Y, DiffOp] = phate(data, varargin)
+function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 
 k = 5;
 a = 10;
@@ -50,7 +50,8 @@ DiffDeg = diag(sum(GsKer,2)); % degrees
 DiffOp = DiffDeg^(-1)*GsKer; % row stochastic
 
 disp 'diffusing operator'
-X = DiffOp^t;
+DiffOp_t = DiffOp^t;
+X = DiffOp_t;
 
 disp(['symm: ' symm])
 switch symm
