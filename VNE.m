@@ -126,4 +126,6 @@ if(plot_on)
 % Plot the entropy; choose a t in the flatter range after the 'knee' for generally best results
     disp 'VNE plotted'
     plot(t_vec,H,'*-')
+    xlabel('t')
+    ylabel('VNE')
 end
