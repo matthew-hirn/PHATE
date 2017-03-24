@@ -7,6 +7,8 @@ t = 12;
 ndim = 2;
 mds_method = 'cmds';
 symm = 'pdist';
+distfun = 'euclidean';
+pca_method = 'svd';
 
 for i=1:length(varargin)
         if(strcmp(varargin{i},'k'))
@@ -30,16 +32,21 @@ for i=1:length(varargin)
         if(strcmp(varargin{i},'symm'))
            symm =  lower(varargin{i+1});
         end
+        if(strcmp(varargin{i},'distfun'))
+           distfun =  lower(varargin{i+1});
+        end
+        if(strcmp(varargin{i},'pca_method'))
+           pca_method =  lower(varargin{i+1});
+        end
 end
 
 disp '======= PHATE ======='
 
-disp 'fast random PCA'
-M = randPCAproj(data, npca);
+M = svdpca(data, npca, pca_method);
 
 disp 'computing distances'
-PDX = squareform(pdist(M));
-[~, knnDST] = knnsearch(M,M,'K',k+1);
+PDX = squareform(pdist(M, distfun));
+[~, knnDST] = knnsearch(M,M,'K',k+1,'dist',distfun);
 
 disp 'computing kernel and operator'
 epsilon = knnDST(:,k+1); % bandwidth(x) = distance to k-th neighbor of x
@@ -60,27 +67,26 @@ switch symm
         disp 'potential recovery'
         X(X<=eps)=eps;
         X = -log(X);
-        disp ' setting diag to zero'
+        disp 'setting diag to zero'
         X = X - diag(diag(X));
     case 'x+xt'
         X = (X + X') ./ 2;
         disp 'potential recovery'
         X(X<=eps)=eps;
         X = -log(X);
-        disp ' setting diag to zero'
+        disp 'setting diag to zero'
         X = X - diag(diag(X));
     case 'pdist'
         disp 'potential recovery'
         X(X<=eps)=eps;
         X = -log(X);
-        X = randPCAproj(X, npca); % to make pdist faster?
+        X = svdpca(X, npca, pca_method);
         X = squareform(pdist(X));
 end
 
 switch mds_method
     case 'cmds_fast'
-        disp 'fast random CMDS -- not working properly for mds'
-        Y = randPCAproj(X, ndim);
+        Y = randmds(X, ndim);
     case 'cmds'
         disp 'CMDS'
         Y = cmdscale(X, ndim);
@@ -90,4 +96,4 @@ switch mds_method
         Y = mdscale(X, ndim, 'options', opt);
 end
 
-
+disp 'done.'
