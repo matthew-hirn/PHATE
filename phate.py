@@ -93,7 +93,7 @@ if M is None:
 	    M = M + noise
 	    np.savetxt('test_M.csv',M,delimiter=',')
 
-C = [i//n_branch for i in range(n_branch*branch_length)]
+C = [i//n_branch for i in range(n_branch*branch_length)] #returns the group labels for each point to make it easier to visualize embeddings
 
 ### Application of diffusion maps
 
