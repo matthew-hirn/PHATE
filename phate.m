@@ -18,10 +18,12 @@ function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 %   'ndim' (default = 2)
 %       The number of desired PHATE dimensions in the output Y. 2 or 3 is best for visualization. A higher number can be used for 
 %       running other analyses on the PHATE dimensions.
-%   'pca_method' (default = 'svd')
+%   'pca_method' (default = 'random')
 %       The desired method for implementing pca for preprocessing the data. Options include 'svd', 'random', and 'none' (no pca) 
 %   'npca' (default = 100)
 %       The number of PCA components for preprocessing the data
+%   'mds_method' (default = 'cmds_fast')
+%       Method for implementing MDS. Choices are 'cmds' (built-in matlab function), 'cmds_fast' (uses fast PCA), and 'nmmds'
 %   'distfun' (default = 'euclidean')
 %       The desired distance function for calculating pairwise distances on the data.
 %   'symm' (default = 'pdist')
@@ -41,10 +43,10 @@ a = 10;
 npca = 100;
 t = 20;
 ndim = 2;
-mds_method = 'cmds';
+mds_method = 'cmds_fast';
 symm = 'pdist';
 distfun = 'euclidean';
-pca_method = 'svd';
+pca_method = 'random';
 DiffOp = [];
 DiffOp_t = [];
 
@@ -118,7 +120,7 @@ if(isempty(DiffOp)&isempty(DiffOp_t))
     clear GsKer PDX
 end
 
-Check to see if pre computed DiffOp_t is given
+% Check to see if pre computed DiffOp_t is given
 if(isempty(DiffOp_t))
     disp 'diffusing operator'
     DiffOp_t = DiffOp^t;
