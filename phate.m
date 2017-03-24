@@ -109,11 +109,12 @@ disp '======= PHATE ======='
 
 % Check to see if precomputed DiffOp or DiffOp_t are given
 if(isempty(DiffOp)&isempty(DiffOp_t))
-    M = svdpca(data, npca, pca_method);
     if log_transform
         disp 'Log transformed the data'
         M = log(M+.1);
     end
+    M = svdpca(data, npca, pca_method);
+    
     disp 'computing distances'
     PDX = squareform(pdist(M, distfun));
     [~, knnDST] = knnsearch(M,M,'K',k+1,'dist',distfun);
