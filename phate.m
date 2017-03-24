@@ -24,7 +24,7 @@ function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 %       The number of PCA components for preprocessing the data
 %   'mds_method' (default = 'cmds_fast')
 %       Method for implementing MDS. Choices are 'cmds' (built-in matlab function), 'cmds_fast' (uses fast PCA), and 'nmmds'
-%   'log' (default = 'true')
+%   'log' (default = 'false')
 %       Toggles whether the log transform is used in preprocessing the data
 %   'distfun' (default = 'euclidean')
 %       The desired distance function for calculating pairwise distances on the data.
@@ -51,7 +51,7 @@ distfun = 'euclidean';
 pca_method = 'random';
 DiffOp = [];
 DiffOp_t = [];
-log_transform = 'true';
+log_transform = 'false';
 
 % get input parameters
 for i=1:length(varargin)
