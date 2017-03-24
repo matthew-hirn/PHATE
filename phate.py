@@ -122,15 +122,20 @@ X = np.linalg.matrix_power(DiffOp,t)
 X[X == 0] = np.finfo(float).eps
 X = -1*np.log(X)
 
-#nonmetric MDS doesn't work yet
-Y_cmds = cmdscale(squareform(pdist(X)))[0]
+## MDS embeddings, each gives a different output.
+X_dist = squareform(pdist(X))
+
+#classical MDS as defined above
+Y_cmds = cmdscale(X_dist)[0]
+#Metric MDS from sklearn
 Y_mmds = MDS(n_components=2, metric=True, max_iter=3000, eps=1e-12,
                     dissimilarity="precomputed", random_state=seed, n_jobs=16,
-                    n_init=1).fit_transform(squareform(pdist(X)))
+                    n_init=1).fit_transform(X_dist)
+#Nonmetric MDS from sklearn using metric MDS as an initialization
 nmds_init = Y_mmds
 Y_nmds = MDS(n_components=2, metric=False, max_iter=3000, eps=1e-12,
                     dissimilarity="precomputed", random_state=seed, n_jobs=16,
-                    n_init=1).fit_transform(squareform(pdist(X)),init=nmds_init)
+                    n_init=1).fit_transform(X_dist,init=nmds_init)
 
 ##to visualize embedding if desired
 Y = Y_cmds
