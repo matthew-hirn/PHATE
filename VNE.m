@@ -77,13 +77,14 @@ for i=1:length(varargin)
    
 end
 
-
-M = svdpca(data, npca, pca_method);
-
 if log_transform
     disp 'Log transformed the data'
     M = log(M+.1);
 end
+
+M = svdpca(data, npca, pca_method);
+
+
 
 disp 'computing distances'
 PDX = squareform(pdist(M, distfun));
