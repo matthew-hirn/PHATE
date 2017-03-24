@@ -22,6 +22,8 @@ function [H, t_vec, DiffOp] = VNE(data, varargin)
 %       The desired method for implementing pca for preprocessing the data. Options include 'svd', 'random', and 'none' (no pca) 
 %   'npca' (default = 100)
 %       The number of PCA components for preprocessing the data
+%   'log' (default = 'true')
+%       Toggles whether the log transform is used in preprocessing the data
 %   'distfun' (default = 'euclidean')
 %       The desired distance function for calculating pairwise distances on the data.
 %   'plot' (default = 'true')
@@ -36,6 +38,7 @@ npca = 100;
 distfun = 'euclidean';
 pca_method = 'random';
 plot_on = 'true';
+log_transform = 'true';
 
 % get input parameters
 for i=1:length(varargin)
@@ -67,11 +70,19 @@ for i=1:length(varargin)
     if(strcmp(varargin{i},'plot'))
         plot_on = lower(varargin{i+1});
     end
+    % Log transform for preprocessing?
+    if(strcmp(varargin{i},'log'))
+        log_transform = lower(varargin{i+1});
+    end
    
 end
 
 
 M = svdpca(data, npca, pca_method);
+
+if log_transform
+    M = log(M+.1);
+end
 
 disp 'computing distances'
 PDX = squareform(pdist(M, distfun));
