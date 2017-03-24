@@ -117,7 +117,7 @@ if(isempty(DiffOp)&isempty(DiffOp_t))
     DiffOp = DiffDeg^(-1)*GsKer; % row stochastic
 
     % Clear a bit of space for memory
-    clear GsKer PDX
+    clear GsKer PDX DiffDeg
 end
 
 % Check to see if pre computed DiffOp_t is given
