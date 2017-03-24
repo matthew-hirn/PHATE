@@ -67,10 +67,6 @@ def cmdscale(D):
     return Y, evals
 
 
-
-def phate(M=None,metric=True):
-
-
 ### Phate code with toy example. The data matrix `M` should have `N` rows and `d` columns. 
 ### If `d` is greater than 100, then PCA is reccomended as a dimensionality reduction strategy.
 
