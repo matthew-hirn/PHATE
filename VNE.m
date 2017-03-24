@@ -106,9 +106,11 @@ clear GsKer PDX DiffDeg
 X=DiffAff;
 
 % Find the eigenvalues
+disp 'Finding the eigenvalues'
 [~,S] = svd(X); 
 S=diag(S);
 
+disp 'Computing VNE'
 H = nan(size(t_vec)); 
 for I=1:length(t_vec) 
     t = t_vec(I); 
@@ -122,5 +124,6 @@ end
 
 if(plot_on)
 % Plot the entropy; choose a t in the flatter range after the 'knee' for generally best results
+    disp 'VNE plotted'
     plot(t_vec,H,'*-')
 end
