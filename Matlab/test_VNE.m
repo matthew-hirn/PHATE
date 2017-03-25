@@ -31,10 +31,9 @@ t_vec = 1:150;
 k = 5;
 a = 13;
 pca_method = 'none';
-log_transform = 0;
 
 % Choose a t value in the flatter range after the knee
-[H, t_vec] = VNE(M,'t_vec',t_vec,'k',k,'a',a,'pca_method',pca_method,'log',log_transform);
+[H, t_vec] = VNE(M,'t_vec',t_vec,'k',k,'a',a,'pca_method',pca_method);
 
 
 
