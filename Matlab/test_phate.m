@@ -49,7 +49,7 @@ log_transform = 0;
 mds_method = 'cmds_fast'; % fast CMDS using random PCA
 symm = 'pdist';
 ndim = 2;
-Y_cmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'log',log_transform,'mds_method',mds_method,'ndim',ndim,'symm',symm);
+Y_cmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'symm',symm);
 
 %% Plot the embedding colored by branch
 figure;
@@ -70,7 +70,7 @@ log_transform = 0;
 mds_method = 'nmmds';
 symm = 'pdist';
 ndim = 2;
-Y_nmmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'log',log_transform,'mds_method',mds_method,'ndim',ndim,'symm',symm);
+Y_nmmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'symm',symm);
 
 %% Plot the embedding colored by branch
 figure;
@@ -91,7 +91,7 @@ log_transform = 0;
 mds_method = 'nmmds';
 symm = 'x*xt'; % <--- different symmetrization
 ndim = 2;
-Y_nmmds2 = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'log',log_transform,'mds_method',mds_method,'ndim',ndim,'symm',symm);
+Y_nmmds2 = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'symm',symm);
 
 %% Plot the embedding colored by branch
 figure;
