@@ -1,7 +1,5 @@
 % Test the embedding on the diffusion limited aggregation tree
 % branching data.
-% Authors: Kevin Moon, David van Dijk
-% Created: March 2017
 
 %% Generate the data
 n_dim = 100;
@@ -101,6 +99,8 @@ ylabel('PHATE 2')
 set(gca,'xtick',[])
 set(gca,'ytick',[])
 title 'PHATE using NMMDS with X*Xt'
+
+
 
 %% plot all embeddings combined
 figure;

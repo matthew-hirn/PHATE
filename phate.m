@@ -178,7 +178,8 @@ switch mds_method
     case 'nmmds'
         disp 'NMMDS'
         opt = statset('display', 'iter');
-        Y = mdscale(X, ndim, 'options', opt);
+        Y_start = randmds(X, ndim);
+        Y = mdscale(X, ndim, 'options', opt, 'start', Y_start);
 end
 
 disp 'done.'
