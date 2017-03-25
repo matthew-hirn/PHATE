@@ -39,7 +39,6 @@ npca = 100;
 distfun = 'euclidean';
 pca_method = 'random';
 plot_on = 'true';
-log_transform = 'false';
 
 % get input parameters
 for i=1:length(varargin)
