@@ -9,7 +9,7 @@ n_branch = 20;
 n_steps = 100;
 n_drop = 0;
 seed = 37;
-rng(seed); % random seed for reproducibility (only necessaty fpr random pca and fast (random) mds)
+rng(seed);
 
 %% Generate random fractal tree via DLA
 M = cumsum(-1 + 2*(rand(n_steps,n_dim)),1);
