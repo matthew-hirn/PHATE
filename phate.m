@@ -1,5 +1,8 @@
 function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 % Runs PHATE on input data. data must have cells on the rows and genes on the columns
+%
+% Authors: Kevin Moon, David van Dijk
+% Created: March 2017
 
 % OUTPUT
 %       Y = the PHATE embedding

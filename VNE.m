@@ -1,6 +1,9 @@
 function [H, t_vec, DiffOp] = VNE(data, varargin)
 % Calculates and plots the Von Neumann Entropy (VNE) for choosing the diffusion time 't'. A
 % good choice of 't' is a value in the relatively flat region after the knee in the VNE plot
+%
+% Authors: Kevin Moon, David van Dijk
+% Created: March 2017
 
 % OUTPUT
 %   H = VNE
