@@ -70,12 +70,13 @@ for i=1:length(varargin)
     if(strcmp(varargin{i},'plot'))
         plot_on = lower(varargin{i+1});
     end
+<<<<<<< HEAD:VNE.m
+=======
    
+>>>>>>> origin/master:Matlab/VNE.m
 end
 
 M = svdpca(data, npca, pca_method);
-
-
 
 disp 'computing distances'
 PDX = squareform(pdist(M, distfun));
@@ -109,9 +110,7 @@ for I=1:length(t_vec)
     S_t=S.^t;
     P = S_t/sum(S_t);
     P=P(P>0);
-%     Entropy of eigenvalues
-    H(I) = -sum(P .* log(P));
-
+    H(I) = -sum(P .* log(P)); % Entropy of eigenvalues
 end
 
 if(plot_on)
