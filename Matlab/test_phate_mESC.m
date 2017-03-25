@@ -28,7 +28,7 @@ C = log(M(:,ind) + 0.1);
 %% PCA
 Y_pca = svdpca(M, 2, 'random');
 
-%% Plot the embedding colored by branch
+%% Plot the embedding colored by gene
 figure;
 scatter(Y_pca(:,1),Y_pca(:,2),20,C,'filled')
 axis tight
@@ -49,7 +49,7 @@ symm = 'x*xt';
 ndim = 2;
 Y_cmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'log',log_transform,'mds_method',mds_method,'ndim',ndim,'symm',symm);
 
-% Plot the embedding colored by branch
+% Plot the embedding colored by gene
 figure;
 scatter(Y_cmds(:,1),Y_cmds(:,2),20,C,'filled')
 axis tight
@@ -69,7 +69,7 @@ symm = 'pdist';
 ndim = 2;
 Y_nmmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'log',log_transform,'mds_method',mds_method,'ndim',ndim,'symm',symm);
 
-% Plot the embedding colored by branch
+% Plot the embedding colored by gene
 figure;
 scatter(Y_nmmds(:,1),Y_nmmds(:,2),20,C,'filled')
 axis tight
@@ -89,7 +89,7 @@ symm = 'x*xt'; % <--- different symmetrization
 ndim = 2;
 Y_nmmds2 = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'log',log_transform,'mds_method',mds_method,'ndim',ndim,'symm',symm);
 
-% Plot the embedding colored by branch
+% Plot the embedding colored by gene
 figure;
 scatter(Y_nmmds2(:,1),Y_nmmds2(:,2),20,C,'filled')
 axis tight
