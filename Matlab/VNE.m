@@ -70,10 +70,6 @@ for i=1:length(varargin)
     if(strcmp(varargin{i},'plot'))
         plot_on = lower(varargin{i+1});
     end
-<<<<<<< HEAD:VNE.m
-=======
-   
->>>>>>> origin/master:Matlab/VNE.m
 end
 
 M = svdpca(data, npca, pca_method);
