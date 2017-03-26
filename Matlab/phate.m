@@ -99,20 +99,13 @@ for i=1:length(varargin)
     if(strcmp(varargin{i},'DiffOp_t'))
        DiffOp_t = lower(varargin{i+1});
     end
-<<<<<<< HEAD:phate.m
-=======
-   
->>>>>>> origin/master:Matlab/phate.m
 end
 
 disp '======= PHATE ======='
 
 % Check to see if precomputed DiffOp or DiffOp_t are given
-<<<<<<< HEAD:phate.m
-if(isempty(DiffOp) && isempty(DiffOp_t))
-=======
+
 if(isempty(DiffOp)&isempty(DiffOp_t))
->>>>>>> origin/master:Matlab/phate.m
     M = svdpca(data, npca, pca_method);
     
     disp 'computing distances'
