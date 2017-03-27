@@ -5,7 +5,7 @@
 # Code translated from Matlab to Python by Daniel Burkhardt. Original code by Kevin Moon, Yale Univeristy.
 # Author:    Daniel B. Burkhardt, Yale University
 # Created:   03.24.2017
-# 
+#
 ######
 
 
@@ -20,54 +20,54 @@ import matplotlib.pyplot as plt
 from __future__ import division
 
 def cmdscale(D):
-    """                                                                                       
-    Classical multidimensional scaling (MDS) by Francis Song, New York University
-    http://www.nervouscomputer.com/hfs/cmdscale-in-python/                                                  
-                                                                                               
-    Parameters                                                                                
-    ----------                                                                                
-    D : (n, n) array                                                                          
-        Symmetric distance matrix.                                                            
-                                                                                               
-    Returns                                                                                   
-    -------                                                                                   
-    Y : (n, p) array                                                                          
-        Configuration matrix. Each column represents a dimension. Only the                    
-        p dimensions corresponding to positive eigenvalues of B are returned.                 
-        Note that each dimension is only determined up to an overall sign,                    
-        corresponding to a reflection.                                                        
-                                                                                               
-    e : (n,) array                                                                            
-        Eigenvalues of B.                                                                     
-                                                                                               
     """
-    # Number of points                                                                        
+    Classical multidimensional scaling (MDS) by Francis Song, New York University
+    http://www.nervouscomputer.com/hfs/cmdscale-in-python/
+
+    Parameters
+    ----------
+    D : (n, n) array
+        Symmetric distance matrix.
+
+    Returns
+    -------
+    Y : (n, p) array
+        Configuration matrix. Each column represents a dimension. Only the
+        p dimensions corresponding to positive eigenvalues of B are returned.
+        Note that each dimension is only determined up to an overall sign,
+        corresponding to a reflection.
+
+    e : (n,) array
+        Eigenvalues of B.
+
+    """
+    # Number of points
     n = len(D)
- 
-    # Centering matrix                                                                        
+
+    # Centering matrix
     H = np.eye(n) - np.ones((n, n))/n
- 
-    # YY^T                                                                                    
+
+    # YY^T
     B = -H.dot(D**2).dot(H)/2
- 
-    # Diagonalize                                                                             
+
+    # Diagonalize
     evals, evecs = np.linalg.eigh(B)
- 
-    # Sort by eigenvalue in descending order                                                  
+
+    # Sort by eigenvalue in descending order
     idx   = np.argsort(evals)[::-1]
     evals = evals[idx]
     evecs = evecs[:,idx]
- 
-    # Compute the coordinates using positive-eigenvalued components only                      
+
+    # Compute the coordinates using positive-eigenvalued components only
     w, = np.where(evals > 0)
     L  = np.diag(np.sqrt(evals[w]))
     V  = evecs[:,w]
     Y  = V.dot(L)
- 
+
     return Y, evals
 
 
-### Phate code with toy example. The data matrix `M` should have `N` rows and `d` columns. 
+### Phate code with toy example. The data matrix `M` should have `N` rows and `d` columns.
 ### If `d` is greater than 100, then PCA is reccomended as a dimensionality reduction strategy.
 
 ### Generating random fractal tree via DLA
