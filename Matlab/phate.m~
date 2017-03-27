@@ -130,6 +130,8 @@ if(isempty(DiffOp_t))
     X = DiffOp_t;
 end
 
+X = X*X'; % temp
+
 disp 'potential recovery'
 X(X<=eps)=eps;
 X = -log(X);
