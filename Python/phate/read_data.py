@@ -1,3 +1,6 @@
+import scipy.io as sio
+import numpy
+
 def import_single_cell_file(data_file, file_type):
     print("Importing data...")
 
@@ -12,6 +15,8 @@ def import_single_cell_file(data_file, file_type):
     elif file_type == 'tsv':
         import numpy as np
         M = np.loadtxt(data_file, delimiter='\t')
+    elif file_type == 'fcs':
+        raise NotImplementedError("FCS files are not currently supported. Please post to the GitHub if you're interested in this function.")
     else:
         raise ValueError("Supported files types are ['mtx', 'csv', 'tsv', 'mat', 'fcs']")
 

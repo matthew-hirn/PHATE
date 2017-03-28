@@ -10,7 +10,7 @@ function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 %       DiffOp_t = DiffOp^t
 
 % INPUT
-%       data = data matrix. Must have cells on the rows and genes on the columns 
+%       data = data matrix. Must have cells on the rows and genes on the columns
 % varargin:
 %   't' (default = 20)
 %       Diffusion time scale
@@ -19,10 +19,10 @@ function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 %   'a' (default = 10)
 %       The alpha parameter in the exponent of the kernel function. Determines the kernel decay rate
 %   'ndim' (default = 2)
-%       The number of desired PHATE dimensions in the output Y. 2 or 3 is best for visualization. A higher number can be used for 
+%       The number of desired PHATE dimensions in the output Y. 2 or 3 is best for visualization. A higher number can be used for
 %       running other analyses on the PHATE dimensions.
 %   'pca_method' (default = 'random')
-%       The desired method for implementing pca for preprocessing the data. Options include 'svd', 'random', and 'none' (no pca) 
+%       The desired method for implementing pca for preprocessing the data. Options include 'svd', 'random', and 'none' (no pca)
 %   'npca' (default = 100)
 %       The number of PCA components for preprocessing the data
 %   'mds_method' (default = 'cmds_fast')
@@ -34,7 +34,7 @@ function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 %       multiplication by transpose ('x*xt'; choose 't' to be about half of what you'd use for the other methods), and averaging
 %       the matrix with its transpose ('x+xt').
 %   'DiffOp' (default = [])
-%       If the diffusion operator has been computed on a prior run with the desired parameters, then this option can be used to 
+%       If the diffusion operator has been computed on a prior run with the desired parameters, then this option can be used to
 %       directly input the diffusion operator to save on computational time.
 %   'DiffOp_t' (default = [])
 %       Same as for 'DiffOp', if the powered diffusion operator has been computed on a prior run with the desired parameters,
@@ -107,7 +107,7 @@ disp '======= PHATE ======='
 
 if(isempty(DiffOp)&isempty(DiffOp_t))
     M = svdpca(data, npca, pca_method);
-    
+
     disp 'computing distances'
     PDX = squareform(pdist(M, distfun));
     [~, knnDST] = knnsearch(M,M,'K',k+1,'dist',distfun);

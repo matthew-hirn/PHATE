@@ -66,7 +66,6 @@ def cmdscale(D):
 
     return Y, evals
 
-
 ### Phate code with toy example. The data matrix `M` should have `N` rows and `d` columns.
 ### If `d` is greater than 100, then PCA is reccomended as a dimensionality reduction strategy.
 
@@ -83,15 +82,15 @@ sigma = 4
 if M is None:
 	try:
 	    M = np.genfromtxt('test_M.csv',delimiter = ',')
-	except OSError:
-	    M = np.cumsum(-1 + rand_multiplier*np.random.rand(branch_length,n_dim),0)
-	    for i in range(n_branch-1):
-	        ind = np.random.randint(branch_length)
-	        new_branch = np.cumsum(-1 + rand_multiplier*np.random.rand(branch_length,n_dim),0)
-	        M = np.concatenate([M,new_branch+M[ind,:]])
-	    noise = np.random.normal(0, sigma,M.shape)
-	    M = M + noise
-	    np.savetxt('test_M.csv',M,delimiter=',')
+    except OSError:
+        M = np.cumsum(-1 + rand_multiplier*np.random.rand(branch_length,n_dim),0)
+        for i in range(n_branch-1):
+            ind = np.random.randint(branch_length)
+            new_branch = np.cumsum(-1 + rand_multiplier*np.random.rand(branch_length,n_dim),0)
+            M = np.concatenate([M,new_branch+M[ind,:]])
+        noise = np.random.normal(0, sigma,M.shape)
+        M = M + noise
+        np.savetxt('test_M.csv',M,delimiter=',')
 
 C = [i//n_branch for i in range(n_branch*branch_length)] #returns the group labels for each point to make it easier to visualize embeddings
 
