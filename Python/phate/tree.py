@@ -1,7 +1,7 @@
 ### Generating random fractal tree via DLA
 import numpy as np
 
-def tree_gen(n_dim = 100, n_branch = 20, branch_length = 100,n_drop = 0, rand_multiplier = 2, seed=37, sigma = 4):
+def gen_dla(n_dim = 100, n_branch = 20, branch_length = 100,n_drop = 0, rand_multiplier = 2, seed=37, sigma = 4):
 
     np.random.seed(37)
     M = np.cumsum(-1 + rand_multiplier*np.random.rand(branch_length,n_dim),0)

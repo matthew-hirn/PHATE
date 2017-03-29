@@ -3,6 +3,7 @@ Potential of Heat-diffusion for Affinity-based Trajectory Embedding (PHATE)
 """
 
 # author: Daniel Burkhardt <daniel.burkhardt@yale.edu>
+# (C) 2017 Krishnaswamy Lab 
 
 
 import numpy as np
