@@ -137,4 +137,3 @@ ylabel('PHATE 2')
 set(gca,'xtick',[])
 set(gca,'ytick',[])
 title 'PHATE using NMMDS (X*Xt)'
-

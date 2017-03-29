@@ -3,7 +3,7 @@ Potential of Heat-diffusion for Affinity-based Trajectory Embedding (PHATE)
 """
 
 # author: Daniel Burkhardt <daniel.burkhardt@yale.edu>
-# (C) 2017 Krishnaswamy Lab 
+# (C) 2017 Krishnaswamy Lab
 
 
 import numpy as np
@@ -101,7 +101,7 @@ def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', knn_dist='
     X[X == 0] = np.finfo(float).eps
     X = -1*np.log(X)
 
-    embedding = mds.embed_MDS(X, ndim=n_components, how=mds, distance_metric=mds_dist)
+    embedding = embed_MDS(X, ndim=n_components, how=mds, distance_metric=mds_dist)
 
     return embedding, DiffOp
 

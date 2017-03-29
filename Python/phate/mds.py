@@ -82,7 +82,7 @@ def embed_MDS(X, ndim=2, how='classic', distance_metric='euclidean'):
 
     if how == 'classic':
         #classical MDS as defined in cmdscale
-        Y = cmds.cmdscale(X_dist)[0][:,:ndim]
+        Y = cmdscale(X_dist)[0][:,:ndim]
     elif how == 'metric':
         #Metric MDS from sklearn
         Y = MDS(n_components=ndim, metric=True, max_iter=3000, eps=1e-12,

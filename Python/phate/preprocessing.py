@@ -1,4 +1,5 @@
 import sklearn.preprocessing
+import sklearn.decomposition
 import numpy as np
 
 def pca_reduce(data, n_components=100, solver='auto'):
@@ -25,7 +26,7 @@ def pca_reduce(data, n_components=100, solver='auto'):
     """
 
     print('Running PCA to %s dimensions using %s PCA...'%(n_components, solver))
-    pca_solver = sklearn.preprocessing.PCA(n_components=n_components, svd_solver=solver)
+    pca_solver = sklearn.decomposition.PCA(n_components=n_components, svd_solver=solver)
     data_reduced = pca_solver.fit_transform(data)
 
     return data_reduced
@@ -44,14 +45,13 @@ def library_size_normalize(data, pseudocount=True):
 
     Returns
     -------
-    norm_matrix : ndarray [n, p]
+    data_norm : ndarray [n, p]
         2 dimensional array with normalized gene expression values
     """
-    data = data_matrix.asfptype() #sklearn expects matricies to have shape (n_samples, n_features)
-    norm_matrix = sklearn.preprocessing.normalize(data, norm = 'l1', axis = 1)
+    data_norm = sklearn.preprocessing.normalize(data, norm = 'l1', axis = 1)
     #norm = 'l1' computes the L1 norm which computes the
     #axis = 1 independently normalizes each sample
     if pseudocount:
-        median_transcript_count = np.median(np.asarray(data.sum(axis=1)))
-        norm_matrix = norm_matrix.multiply(median_transcript_count)
-    return norm_matrix
+        median_transcript_count = np.median(data.sum(axis=1))
+        data_norm = data_norm * median_transcript_count
+    return data_norm
