@@ -62,7 +62,7 @@ def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', dist='eucl
 
     References
     ----------
-    .. [1] `Moon, KR et al. (2017). "PHATE: A Dimensionality Reduction Method for Visualizing Trajectory Structures in High-Dimensional Biological Data". Biorxiv.
+    .. [1] `Moon KR, van Dijk D, Zheng W, et al. (2017). "PHATE: A Dimensionality Reduction Method for Visualizing Trajectory Structures in High-Dimensional Biological Data". Biorxiv.
        <http://biorxiv.org/content/early/2017/03/24/120378>`_
 
     """
@@ -145,7 +145,7 @@ class PHATE(BaseEstimator):
 
     References
     ----------
-    .. [1] `Moon, KR et al. (2017). "PHATE: A Dimensionality Reduction Method for Visualizing Trajectory Structures in High-Dimensional Biological Data". Biorxiv.
+    .. [1] `Moon KR, van Dijk D, Zheng W, et al. (2017). "PHATE: A Dimensionality Reduction Method for Visualizing Trajectory Structures in High-Dimensional Biological Data". Biorxiv.
        <http://biorxiv.org/content/early/2017/03/24/120378>`_
     """
 
