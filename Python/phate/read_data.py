@@ -1,9 +1,9 @@
 import scipy.io as sio
-import numpy
+import numpy as np
 
 def import_single_cell_file(data_file, file_type='csv'):
     """Basic IO
-    
+
     Parameters
     ----------
     data_file : string
@@ -24,13 +24,10 @@ def import_single_cell_file(data_file, file_type='csv'):
     file_type = file_type.lower()
 
     if file_type == 'mtx':
-        import scipy.io as sio
         M = sio.mmread(data_file)
     elif file_type == 'csv':
-        import numpy as np
         M = np.loadtxt(data_file, delimiter=',')
     elif file_type == 'tsv':
-        import numpy as np
         M = np.loadtxt(data_file, delimiter='\t')
     elif file_type == 'fcs':
         raise NotImplementedError("FCS files are not currently supported. Please post to the GitHub if you're interested in this function.")

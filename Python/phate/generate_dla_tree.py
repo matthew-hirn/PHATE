@@ -15,4 +15,4 @@ def tree_gen(n_dim = 100, n_branch = 20, branch_length = 100,n_drop = 0, rand_mu
 
     C = [i//n_branch for i in range(n_branch*branch_length)] #returns the group labels for each point to make it easier to visualize embeddings
 
-    return (M,C)
+    return M, C

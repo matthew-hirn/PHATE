@@ -1,6 +1,6 @@
 import sklearn.preprocessing
 
-def PCA_reduce(data, n_components=100, solver='auto'):
+def pca_reduce(data, n_components=100, solver='auto'):
     """PCA dimensionality reduction
     Reduces input matrix and saves only n_components
 
