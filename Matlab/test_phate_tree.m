@@ -46,9 +46,9 @@ a = 13;
 k = 5;
 pca_method = 'random'; % fast PCA
 mds_method = 'cmds_fast'; % fast CMDS using random PCA
-symm = 'pdist';
+distfun_mds = 'euclidean';
 ndim = 2;
-Y_cmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'symm',symm);
+Y_cmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'distfun_mds',distfun_mds);
 
 %% Plot the embedding colored by branch
 figure;
@@ -66,9 +66,9 @@ a = 13;
 k = 5;
 pca_method = 'random'; % fast PCA
 mds_method = 'nmmds';
-symm = 'pdist';
+distfun_mds = 'euclidean';
 ndim = 2;
-Y_nmmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'symm',symm);
+Y_nmmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'distfun_mds',distfun_mds);
 
 %% Plot the embedding colored by branch
 figure;
@@ -80,15 +80,15 @@ set(gca,'xtick',[])
 set(gca,'ytick',[])
 title 'PHATE using NMMDS'
 
-%% Run PHATE using NMMDS and X*Xt symmetrization
-t = 15; % half of t used with other symmetrizations
+%% Run PHATE using NMMDS and 
+t = 30; 
 a = 13;
 k = 5;
 pca_method = 'random'; % fast PCA
 mds_method = 'nmmds';
-symm = 'x*xt'; % <--- different symmetrization
+distfun_mds = 'cosine'; % <--- different mds distance
 ndim = 2;
-Y_nmmds2 = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'symm',symm);
+Y_nmmds2 = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'distfun_mds',distfun_mds);
 
 %% Plot the embedding colored by branch
 figure;
@@ -98,7 +98,7 @@ xlabel('PHATE 1')
 ylabel('PHATE 2')
 set(gca,'xtick',[])
 set(gca,'ytick',[])
-title 'PHATE using NMMDS with X*Xt'
+title 'PHATE using NMMDS with Cosine MDS distance'
 
 %% plot all embeddings combined
 figure;

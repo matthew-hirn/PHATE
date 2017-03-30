@@ -44,10 +44,10 @@ a = 50;
 k = 4;
 pca_method = 'random'; % fast PCA
 mds_method = 'cmds_fast'; % fast CMDS using random PCA
-symm = 'x*xt';
+distfun_mds = 'cosine';
 %symm = 'pdist';
 ndim = 2;
-Y_cmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'symm',symm);
+Y_cmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'distfun_mds',distfun_mds);
 
 % Plot the embedding colored by gene
 figure;
@@ -57,17 +57,17 @@ xlabel('PHATE 1')
 ylabel('PHATE 2')
 set(gca,'xtick',[])
 set(gca,'ytick',[])
-title 'PHATE using CMDS X*Xt'
+title 'PHATE using cosine CMDS'
 
-%% Run PHATE using NMMDS with pdist symmetrization (slower but more accurate)
+%% Run PHATE using NMMDS with Euclidean mds distance (slower but more accurate)
 t = 25;
 a = 50;
 k = 4;
 pca_method = 'random'; % fast PCA
 mds_method = 'nmmds';
-symm = 'pdist';
+distfun_mds = 'euclidean';
 ndim = 2;
-Y_nmmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'symm',symm);
+Y_nmmds = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'distfun_mds',distfun_mds);
 
 % Plot the embedding colored by gene
 figure;
@@ -77,17 +77,17 @@ xlabel('PHATE 1')
 ylabel('PHATE 2')
 set(gca,'xtick',[])
 set(gca,'ytick',[])
-title 'PHATE using NMMDS pdist'
+title 'PHATE using NMMDS Euclidean'
 
-%% Run PHATE using NMMDS and X*Xt symmetrization
+%% Run PHATE using NMMDS and Cosine distance
 t = 25;
 a = 50;
 k = 4;
 pca_method = 'random'; % fast PCA
 mds_method = 'nmmds';
-symm = 'x*xt'; % <--- different symmetrization
+distfun_mds = 'cosine'; % <--- different mds distance
 ndim = 2;
-Y_nmmds2 = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'symm',symm);
+Y_nmmds2 = phate(M,'t',t,'k',k,'a',a,'pca_method',pca_method,'mds_method',mds_method,'ndim',ndim,'distfun_mds',distfun_mds);
 
 % Plot the embedding colored by gene
 figure;
@@ -97,7 +97,7 @@ xlabel('PHATE 1')
 ylabel('PHATE 2')
 set(gca,'xtick',[])
 set(gca,'ytick',[])
-title 'PHATE using NMMDS with X*Xt'
+title 'PHATE using NMMDS with Cosine MDS distance'
 
 %% plot all embeddings combined
 figure;
