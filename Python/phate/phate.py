@@ -16,7 +16,7 @@ from scipy.spatial.distance import squareform
 
 from .mds import embed_MDS
 
-def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', knn_dist='euclidean', mds_dist='euclidean', diff_op=None, diff_potential=None, random_state=None):
+def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', knn_dist='euclidean', mds_dist='euclidean', diff_op=None, diff_potential=None, njobs=1, random_state=None):
     """
     Embeds high dimensional single-cell data into two or three dimensions for visualization of biological progressions.
 
@@ -119,7 +119,7 @@ def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', knn_dist='
     print("Embedding data using %s MDS..."%(mds))
     embedding = embed_MDS(diff_potential, ndim=n_components, how=mds, distance_metric=mds_dist, njobs=njobs, seed=random_state)
     print("Embedded data in %.2f seconds."%(time.time() - tic))
-    print("Finished PHATE embedding in %.2f seconds."%(time.time() - tic))
+    print("Finished PHATE embedding in %.2f seconds.\n"%(time.time() - tic))
     return embedding, diff_op, diff_potential
 
 class PHATE(BaseEstimator):
@@ -243,7 +243,7 @@ class PHATE(BaseEstimator):
         The cells embedded in a lower dimensional space using PHATE
         """
         self.embedding, self.diff_op, self.diff_potential = embed_phate(X, n_components=self.ndim, a=self.a, k=self.k, t=self.t,
-                                                                        mds=self.mds, knn_dist=self.knn_dist, mds_dist=self.mds_dist, njobs=self.njobs
+                                                                        mds=self.mds, knn_dist=self.knn_dist, mds_dist=self.mds_dist, njobs=self.njobs,
                                                                         diff_op = self.diff_op, diff_potential = self.diff_potential, random_state=self.random_state)
 
         return self.embedding
