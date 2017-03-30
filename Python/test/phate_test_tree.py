@@ -13,4 +13,4 @@ def main(argv=None):
         np.savetxt(f, embedding, delimiter=',')
 
 if __name__ == '__main__':
-    sys.exit(main())
+sys.exit(main())
