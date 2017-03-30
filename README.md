@@ -16,4 +16,4 @@ All the dependencies will be automatically installed using the above commands
 #### Usage
 
 ##### Command line
-A tutorial on PHATE usage and results visualization for single cell RNA-seq data can be found in this notebook: https://nbviewer.jupyter.org/github/SmitaKrishnaswamy/PHATE/blob/python-dev/Python/test/phate_examples.ipynb
+A tutorial on MAGIC usage and results visualization for single cell RNA-seq data can be found in this notebook: http://nbviewer.jupyter.org/github/pkathail/magic/blob/develop/notebooks/Magic_single_cell_RNAseq.ipynb
