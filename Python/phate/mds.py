@@ -1,6 +1,7 @@
 from sklearn.manifold import MDS
 from scipy.spatial.distance import pdist
 from scipy.spatial.distance import squareform
+import numpy as np
 
 def cmdscale(D):
     """
