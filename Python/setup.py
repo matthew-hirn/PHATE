@@ -9,19 +9,15 @@ if sys.version_info.major != 3:
 
 
 setup(name='phate',
-      version='0.0',
+      version='0.1',
       description='PHATE',
-      author='Daniel Burkhardt',
+      author='Daniel Burkhardt, Krishnaswamy Lab, Yale University',
       author_email='daniel.burkhardt@yale.edu',
-      package_dir={'': 'src'},
-      packages=['phate'],
-      install_requires=[
-          'numpy>=1.10.0',
-          'pandas>=0.18.0',
-          'scipy>=0.14.0',
-          'matplotlib',
-          'sklearn'
-          ]
+      packages=['phate',],
+      license='GNU General Public License Version 2',
+      install_requires=['numpy>=1.10.0', 'pandas>=0.18.0', 'scipy>=0.14.0',
+          'matplotlib', 'sklearn'],
+       long_description=open('README.md').read(),
       )
 
 
