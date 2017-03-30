@@ -10,7 +10,7 @@ PHATE has been implemented in Python3 and Matlab.
         $ cd Python
         $ python3 setup.py install --user
 
-2. MAGIC depends on a number of `python3` packages available on pypi and these dependencies are listed in `setup.py`
+2. PHATE depends on a number of `python3` packages available on pypi and these dependencies are listed in `setup.py`
 All the dependencies will be automatically installed using the above commands
 
 ##### Command line
