@@ -22,7 +22,7 @@ def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', knn_dist='
 
     Parameters
     ----------
-    data: ndarray [n, p]
+    data : ndarray [n, p]
         2 dimensional input data array with n cells and p dimensions
 
     n_components : int, optional, default: 2
@@ -129,7 +129,7 @@ class PHATE(BaseEstimator):
 
     Parameters
     ----------
-    data: ndarray [n, p]
+    data : ndarray [n, p]
         2 dimensional input data array with n cells and p dimensions
 
     n_components : int, optional, default: 2
