@@ -1,7 +1,7 @@
 PHATE  - Potential of Heat-diffusion for Affinity-based Trajectory Embedding
 -------------------------------------------------------
 
-PHATE is a tool for visualizing high dimensional single-cell data with natural progressions or trajectories. PHATE using a novel conceptual framework for learning and visualizing the manifold inherent to biological systems in which smooth transitions mark the progressions of cells from one state to another. To see how PHATE can be applied to single-cell RNA-seq datasets from hematopoietic stem cells, human embryonic stem cells, and bone marrow samples, check out our preprint on BioRxiv.
+PHATE is a tool for visualizing high dimensional single-cell data with natural progressions or trajectories. PHATE uses a novel conceptual framework for learning and visualizing the manifold inherent to biological systems in which smooth transitions mark the progressions of cells from one state to another. To see how PHATE can be applied to single-cell RNA-seq datasets from hematopoietic stem cells, human embryonic stem cells, and bone marrow samples, check out our preprint on BioRxiv.
 
 [Kevin R. Moon, David van Dijk, Zheng Wang, et al. **PHATE: A Dimensionality Reduction Method for Visualizing Trajectory Structures in High-Dimensional Biological Data**. 2017. *BioRxiv*](http://biorxiv.org/content/early/2017/03/24/120378)
 
@@ -18,7 +18,7 @@ PHATE has been implemented in Python3 and Matlab.
         $ cd Python
         $ python3 setup.py install --user
 
-2. MAGIC depends on a number of `python3` packages available on pypi and these dependencies are listed in `setup.py`
+2. PHATE depends on a number of `python3` packages available on pypi and these dependencies are listed in `setup.py`
 All the dependencies will be automatically installed using the above commands
 
 #### Installation and dependencies for the MATLAB version
