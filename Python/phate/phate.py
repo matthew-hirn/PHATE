@@ -100,7 +100,7 @@ def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', knn_dist='
         gs_ker = pdx = diff_deg = knn_dst = M = None
         print("Built graph and diffusion operator in %.2f seconds."%(time.time() - tic))
     else:
-        print("Using precomputed diffusion operator")
+        print("Using precomputed diffusion operator...")
 
     if diff_potential is None:
         tic = time.time()
