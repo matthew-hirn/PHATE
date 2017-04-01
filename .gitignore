@@ -26,9 +26,11 @@ Temporary Items
 .apdisk
 
 #pycache
-__pycache__
-build
-phate.egg-info
-dist
-.ipynb*
-scratch*
+__pycache__/
+build/
+phate.egg-info/
+dist/
+.ipynb_checkpoints/
+scratch.py
+
+doc/
