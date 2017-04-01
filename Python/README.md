@@ -25,4 +25,4 @@ If you want to try running some of our test scripts on a DLA fractal tree:
         $ ./phate_test_mESC.py #output opens in a matplotlib window
 
 ### Jupyter Notebook
-A tutorial on PHATE usage and visualization for single cell RNA-seq data can be found in this notebook: [https://nbviewer.jupyter.org/github/SmitaKrishnaswamy/PHATE/blob/python-dev/Python/test/phate_examples.ipynb](https://nbviewer.jupyter.org/github/SmitaKrishnaswamy/PHATE/blob/python-dev/Python/test/phate_examples.ipynb?flush_cache=true)
+A tutorial on PHATE usage and visualization for single cell RNA-seq data can be found in this notebook: [https://nbviewer.jupyter.org/github/SmitaKrishnaswamy/PHATE/blob/python-dev/Python/test/phate_examples.ipynb](https://nbviewer.jupyter.org/github/SmitaKrishnaswamy/PHATE/blob/python-dev/Python/test/phate_examples.ipynb)
