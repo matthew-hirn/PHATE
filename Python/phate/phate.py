@@ -119,7 +119,7 @@ def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', knn_dist='
     print("Embedding data using %s MDS..."%(mds))
     embedding = embed_MDS(diff_potential, ndim=n_components, how=mds, distance_metric=mds_dist, njobs=njobs, seed=random_state)
     print("Embedded data in %.2f seconds."%(time.time() - tic))
-    print("Finished PHATE embedding in %.2f seconds.\n"%(time.time() - tic))
+    print("Finished PHATE embedding in %.2f seconds.\n"%(time.time() - start))
     return embedding, diff_op, diff_potential
 
 class PHATE(BaseEstimator):
