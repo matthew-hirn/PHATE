@@ -12,7 +12,7 @@ PHATE has been implemented in Python3 and Matlab.
 
 
 #### Installation and dependencies for the Python version
-1. The Python3 version of MAGIC can be installed using:
+1. The Python3 version of PHATE can be installed using:
 
         $ git clone git://github.com/SmitaKrishnaswamy/PHATE.git
         $ cd Python
