@@ -33,5 +33,5 @@ All the dependencies will be automatically installed using the above commands
 
 1. Check back soon, R code is coming!
 
-### Python Tutorial
+### Python Demo
 A demo on PHATE usage and visualization for single cell RNA-seq data can be found in this notebook: [https://nbviewer.jupyter.org/github/SmitaKrishnaswamy/PHATE/blob/python-dev/Python/test/phate_examples.ipynb](https://nbviewer.jupyter.org/github/SmitaKrishnaswamy/PHATE/blob/python-dev/Python/test/phate_examples.ipynb?flush_cache=true)
