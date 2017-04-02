@@ -45,17 +45,16 @@ def pca_reduce(data, n_components=100, solver='sparse'):
 
     return data_reduced
 
-def library_size_normalize(data, pseudocount=True):
+def library_size_normalize(data):
     """Performs L1 normalization on input data
-    Performs L1 normalization on input data such that the sum of expression values for each cell sums to 1. If psuedocount=True, returns normalized matrix to the metric space using median UMI count per cell effectively scaling all cells as if they were sampled evenly.
+    Performs L1 normalization on input data such that the sum of expression values for each cell sums to 1
+    then returns normalized matrix to the metric space using median UMI count per
+    cell effectively scaling all cells as if they were sampled evenly.
 
     Parameters
     ----------
     data : ndarray [n,p]
         2 dimensional input data array with n cells and p dimensions
-
-    pseudocount : boolean, optional, default: True
-        If true, then the normalized matrix is returned to the metric space using the median transcript count per cell
 
     Returns
     -------
@@ -66,7 +65,7 @@ def library_size_normalize(data, pseudocount=True):
     data_norm = sklearn.preprocessing.normalize(data, norm = 'l1', axis = 1)
     #norm = 'l1' computes the L1 norm which computes the
     #axis = 1 independently normalizes each sample
-    if pseudocount:
-        median_transcript_count = np.median(data.sum(axis=1))
-        data_norm = data_norm * median_transcript_count
+
+    median_transcript_count = np.median(data.sum(axis=1))
+    data_norm = data_norm * median_transcript_count
     return data_norm
