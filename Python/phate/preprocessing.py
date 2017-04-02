@@ -1,3 +1,6 @@
+# author: Daniel Burkhardt <daniel.burkhardt@yale.edu>
+# (C) 2017 Krishnaswamy Lab GPLv2
+
 import sklearn.preprocessing
 import sklearn.decomposition
 import numpy as np

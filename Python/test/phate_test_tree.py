@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# author: Daniel Burkhardt <daniel.burkhardt@yale.edu>
+# (C) 2017 Krishnaswamy Lab GPLv2
+
 import phate
 import matplotlib.pyplot as plt
 import sklearn.manifold

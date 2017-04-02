@@ -1,3 +1,6 @@
+# author: Daniel Burkhardt <daniel.burkhardt@yale.edu>
+# (C) 2017 Krishnaswamy Lab GPLv2
+
 from sklearn.manifold import MDS
 from scipy.spatial.distance import pdist
 from scipy.spatial.distance import squareform

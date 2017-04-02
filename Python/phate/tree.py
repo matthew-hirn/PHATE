@@ -1,3 +1,6 @@
+# author: Daniel Burkhardt <daniel.burkhardt@yale.edu>
+# (C) 2017 Krishnaswamy Lab GPLv2
+
 ### Generating random fractal tree via DLA
 import numpy as np
 

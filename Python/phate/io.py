@@ -1,3 +1,6 @@
+# author: Daniel Burkhardt <daniel.burkhardt@yale.edu>
+# (C) 2017 Krishnaswamy Lab GPLv2
+
 import pandas as pd
 import scipy.io as sio
 
