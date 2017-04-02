@@ -11,7 +11,7 @@ PHATE has been implemented in Python3 and Matlab.
 
 ### Getting started
 
-#### Installation and dependencies for the Python version
+#### Python installation and dependencies
 1. The Python3 version of PHATE can be installed using:
 
         $ git clone git://github.com/SmitaKrishnaswamy/PHATE.git
@@ -21,7 +21,7 @@ PHATE has been implemented in Python3 and Matlab.
 2. PHATE depends on a number of `python3` packages available on pypi and these dependencies are listed in `setup.py`
 All the dependencies will be automatically installed using the above commands
 
-#### Installation and dependencies for the MATLAB version
+#### MATLAB installation
 1. The MATLAB version of PHATE can be accessed using:
 
         $ git clone git://github.com/SmitaKrishnaswamy/PHATE.git
