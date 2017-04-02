@@ -13,50 +13,63 @@ from sklearn.base import BaseEstimator
 from scipy.spatial.distance import pdist
 from scipy.spatial.distance import squareform
 
-
 from .mds import embed_MDS
 
 def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', knn_dist='euclidean', mds_dist='euclidean', diff_op=None, diff_potential=None, njobs=1, random_state=None):
     """
     Embeds high dimensional single-cell data into two or three dimensions for visualization of biological progressions.
+
     Parameters
     ----------
     data : ndarray [n, p]
         2 dimensional input data array with n cells and p dimensions
+
     n_components : int, optional, default: 2
         number of dimensions in which the data will be embedded
+
     a : int, optional, default: 10
         sets decay rate of kernel tails
+
     k : int, optional, default: 5
         used to set epsilon while autotuning kernel bandwidth
+
     t : int, optional, default: 30
         power to which the diffusion operator is powered
         sets the level of diffusion
+
     mds : string, optional, default: 'classic'
         choose from ['classic', 'metric', 'nonmetric']
         which multidimensional scaling algorithm is used for dimensionality reduction
+
     knn_dist : string, optional, default: 'euclidean'
         reccomended values: 'eucliean' and 'cosine'
         Any metric from scipy.spatial.distance can be used
         distance metric for building kNN graph
+
     mds_dist : string, optional, default: 'euclidean'
         reccomended values: 'eucliean' and 'cosine'
         Any metric from scipy.spatial.distance can be used
         distance metric for MDS
+
     diff_op : ndarray, optional [n, n], default: None
         Precomputed diffusion operator
+
     diff_potential : ndarray, optional [n, n], default: None
         Precomputed diffusion potential
+
     random_state : integer or numpy.RandomState, optional
         The generator used to initialize SMACOF (metric, nonmetric) MDS
         If an integer is given, it fixes the seed
         Defaults to the global numpy random number generator
+
     Returns
     -------
     embedding : ndarray [n_samples, n_components]
         PHATE embedding in low dimensional space.
+
     diff_op : ndarray [n_samples, n_samples]
         PHATE embedding in low dimensional space.
+
     References
     ----------
     .. [1] `Moon KR, van Dijk D, Zheng W, et al. (2017). "PHATE: A Dimensionality Reduction Method for Visualizing Trajectory Structures in High-Dimensional Biological Data". Biorxiv.
@@ -104,52 +117,67 @@ def embed_phate(data, n_components=2, a=10, k=5, t=30, mds='classic', knn_dist='
     print("Embedding data using %s MDS..."%(mds))
     embedding = embed_MDS(diff_potential, ndim=n_components, how=mds, distance_metric=mds_dist, njobs=njobs, seed=random_state)
     print("Embedded data in %.2f seconds."%(time.time() - tic))
-    print("Finished PHATE embedding in %.2f seconds.\n"%(time.time() - tic))
+    print("Finished PHATE embedding in %.2f seconds.\n"%(time.time() - start))
     return embedding, diff_op, diff_potential
 
 class PHATE(BaseEstimator):
     """Potential of Heat-diffusion for Affinity-based Trajectory Embedding (PHATE)
     Embeds high dimensional single-cell data into two or three dimensions for visualization of biological progressions.
+
     Parameters
     ----------
     data : ndarray [n, p]
         2 dimensional input data array with n cells and p dimensions
+
     n_components : int, optional, default: 2
         number of dimensions in which the data will be embedded
+
     a : int, optional, default: 10
         sets decay rate of kernel tails
+
     k : int, optional, default: 5
         used to set epsilon while autotuning kernel bandwidth
+
     t : int, optional, default: 30
         power to which the diffusion operator is powered
         sets the level of diffusion
+
     mds : string, optional, default: 'classic'
         choose from ['classic', 'metric', 'nonmetric']
         which MDS algorithm is used for dimensionality reduction
+
     knn_dist : string, optional, default: 'euclidean'
         reccomended values: 'eucliean' and 'cosine'
         Any metric from scipy.spatial.distance can be used
         distance metric for building kNN graph
+
     mds_dist : string, optional, default: 'euclidean'
         reccomended values: 'eucliean' and 'cosine'
         Any metric from scipy.spatial.distance can be used
         distance metric for MDS
+
     njobs : integer, optional, default: 1
         The number of jobs to use for the computation.
         If -1 all CPUs are used. If 1 is given, no parallel computing code is used at all, which is useful for debugging.
         For n_jobs below -1, (n_cpus + 1 + n_jobs) are used. Thus for n_jobs = -2, all CPUs but one are used
+
     random_state : integer or numpy.RandomState, optional
         The generator used to initialize SMACOF (metric, nonmetric) MDS
         If an integer is given, it fixes the seed
         Defaults to the global numpy random number generator
+
     Attributes
     ----------
+
     embedding : array-like, shape [n_samples, n_dimensions]
         Stores the position of the dataset in the embedding space
+
     diff_op : array-like, shape [n_samples, n_samples]
         The diffusion operator fit on the input data
+
     diff_potential : array-like, shape [n_samples, n_samples]
         Precomputed diffusion potential
+
     References
     ----------
     .. [1] `Moon KR, van Dijk D, Zheng W, et al. (2017). "PHATE: A Dimensionality Reduction Method for Visualizing Trajectory Structures in High-Dimensional Biological Data". Biorxiv.
@@ -169,7 +197,8 @@ class PHATE(BaseEstimator):
         self.diff_op = None
         self.diff_potential = None
 
-    def reset_mds(self, mds="classic", mds_dist="euclidean"):
+    def reset_mds(self, n_components=2, mds="classic", mds_dist="euclidean"):
+        self.n_components=n_components
         self.mds=mds
         self.mds_dist=mds_dist
 
@@ -181,12 +210,14 @@ class PHATE(BaseEstimator):
     def fit(self, X):
         """
         Computes the position of the cells in the embedding space
+
         Parameters
         ----------
         X : array, shape=[n_samples, n_features]
-        Input data.
+            Input data.
+
         diff_op : array, shape=[n_samples, n_samples], optional
-        Precomputed diffusion operator
+            Precomputed diffusion operator
         """
         self.fit_transform(X)
         return self
@@ -194,12 +225,15 @@ class PHATE(BaseEstimator):
     def fit_transform(self, X):
         """
         Computes the position of the cells in the embedding space
+
         Parameters
         ----------
         X : array, shape=[n_samples, n_features]
-        Input data.
+            Input data.
+
         diff_op : array, shape=[n_samples, n_samples], optional
-        Precomputed diffusion operator
+            Precomputed diffusion operator
+
         Returns
         -------
         embedding : array, shape=[n_samples, n_dimensions]
