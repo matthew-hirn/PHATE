@@ -9,7 +9,7 @@ PHATE is a tool for visualizing high dimensional single-cell data with natural p
 PHATE has been implemented in Python3 and Matlab.
 
 
-
+### Getting started
 
 #### Installation and dependencies for the Python version
 1. The Python3 version of PHATE can be installed using:
@@ -33,5 +33,5 @@ All the dependencies will be automatically installed using the above commands
 
 1. Check back soon, R code is coming!
 
-### Python Demo
+### Python demo
 A demo on PHATE usage and visualization for single cell RNA-seq data can be found in this notebook: [https://nbviewer.jupyter.org/github/SmitaKrishnaswamy/PHATE/blob/python-dev/Python/test/phate_examples.ipynb](https://nbviewer.jupyter.org/github/SmitaKrishnaswamy/PHATE/blob/python-dev/Python/test/phate_examples.ipynb?flush_cache=true)
