@@ -7,7 +7,6 @@ from warnings import warn
 if sys.version_info.major != 3:
     raise RuntimeError('PHATE requires Python 3')
 
-
 setup(name='phate',
       version='0.1',
       description='PHATE',
@@ -19,7 +18,6 @@ setup(name='phate',
           'matplotlib', 'sklearn'],
        long_description=open('README.md').read(),
       )
-
 
 # get location of setup.py
 setup_dir = os.path.dirname(os.path.realpath(__file__))
