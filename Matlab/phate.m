@@ -38,6 +38,9 @@ function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 %   'DiffOp_t' (default = [])
 %       Same as for 'DiffOp', if the powered diffusion operator has been computed on a prior run with the desired parameters,
 %       then this option can be used to directly input the diffusion operator to save on computational time.
+%   'GsKer' (default = [])
+%       Kernel / affinity matrix. The default ([]) is to compute one from
+%       the supplied data.
 
 % set up default parameters
 k = 5;
@@ -51,6 +54,7 @@ distfun_mds = 'euclidean';
 pca_method = 'random';
 DiffOp = [];
 DiffOp_t = [];
+GsKer = [];
 
 % get input parameters
 for i=1:length(varargin)
@@ -98,24 +102,30 @@ for i=1:length(varargin)
     if(strcmp(varargin{i},'DiffOp_t'))
        DiffOp_t = lower(varargin{i+1});
     end
+    % Use precomputed kernel / affinity matrix
+    if(strcmp(varargin{i},'GsKer'))
+       GsKer = lower(varargin{i+1});
+    end
 end
 
 disp '======= PHATE ======='
 
 % Check to see if precomputed DiffOp or DiffOp_t are given
 
-if(isempty(DiffOp)&isempty(DiffOp_t))
-    M = svdpca(data, npca, pca_method);
-
-    disp 'computing distances'
-    PDX = squareform(pdist(M, distfun));
-    [~, knnDST] = knnsearch(M,M,'K',k+1,'dist',distfun);
-
-    disp 'computing kernel and operator'
-    epsilon = knnDST(:,k+1); % bandwidth(x) = distance to k-th neighbor of x
-    PDX = bsxfun(@rdivide,PDX,epsilon); % autotuning d(x,:) using epsilon(x)
-    GsKer = exp(-PDX.^a); % not really Gaussian kernel
-    GsKer=GsKer+GsKer'; % distfunetrization
+if(isempty(DiffOp) && isempty(DiffOp_t))
+    if isempty(GsKer)
+        M = svdpca(data, npca, pca_method);
+        
+        disp 'computing distances'
+        PDX = squareform(pdist(M, distfun));
+        [~, knnDST] = knnsearch(M,M,'K',k+1,'dist',distfun);
+        
+        disp 'computing kernel and operator'
+        epsilon = knnDST(:,k+1); % bandwidth(x) = distance to k-th neighbor of x
+        PDX = bsxfun(@rdivide,PDX,epsilon); % autotuning d(x,:) using epsilon(x)
+        GsKer = exp(-PDX.^a); % not really Gaussian kernel
+        GsKer = GsKer + GsKer'; % distfunetrization
+    end
     DiffDeg = diag(sum(GsKer,2)); % degrees
     DiffOp = DiffDeg^(-1)*GsKer; % row stochastic
 
@@ -133,11 +143,14 @@ end
 disp 'potential recovery'
 X(X<=eps)=eps;
 X = -log(X);
+
 disp(['MDS distfun: ' distfun_mds])
-if strcmp(distfun_mds, 'euclidean')
-    X = svdpca(X, npca, pca_method); % to make pdist faster
+if ~strcmp(distfun_mds, 'none')
+    if strcmp(distfun_mds, 'euclidean')
+        X = svdpca(X, npca, pca_method); % to make pdist faster
+    end
+    X = squareform(pdist(X, distfun_mds));
 end
-X = squareform(pdist(X, distfun_mds));
 
 switch mds_method
     % CMDS using fast pca
