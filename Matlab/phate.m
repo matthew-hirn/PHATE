@@ -39,7 +39,7 @@ function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 %       Same as for 'DiffOp', if the powered diffusion operator has been computed on a prior run with the desired parameters,
 %       then this option can be used to directly input the diffusion operator to save on computational time.
 %   'GsKer' (default = [])
-%       Kernel / affinity matrix. The default ([]) is to compute one from
+%       Kernel / affinity matrix, e.g. to embed a graph. The default ([]) is to compute one from
 %       the supplied data.
 
 % set up default parameters
@@ -113,15 +113,24 @@ disp '======= PHATE ======='
 % Check to see if precomputed DiffOp or DiffOp_t are given
 
 if(isempty(DiffOp) && isempty(DiffOp_t))
+    % check if GsKer is supplied
     if isempty(GsKer)
-        M = svdpca(data, npca, pca_method);
+        if ~strcmp(pca_method, 'none')
+            M = svdpca(data, npca, pca_method);
+        else
+            M = data;
+        end
         
         disp 'computing distances'
-        PDX = squareform(pdist(M, distfun));
-        [~, knnDST] = knnsearch(M,M,'K',k+1,'dist',distfun);
+        if isa(distfun, 'function_handle')
+            PDX = pdist2(M, M, distfun);
+        else
+            PDX = squareform(pdist(M, distfun));
+        end
         
         disp 'computing kernel and operator'
-        epsilon = knnDST(:,k+1); % bandwidth(x) = distance to k-th neighbor of x
+        knnDST = sort(PDX);
+        epsilon = knnDST(k+1,:); % bandwidth(x) = distance to k-th neighbor of x
         PDX = bsxfun(@rdivide,PDX,epsilon); % autotuning d(x,:) using epsilon(x)
         GsKer = exp(-PDX.^a); % not really Gaussian kernel
         GsKer = GsKer + GsKer'; % distfunetrization
@@ -147,7 +156,9 @@ X = -log(X);
 disp(['MDS distfun: ' distfun_mds])
 if ~strcmp(distfun_mds, 'none')
     if strcmp(distfun_mds, 'euclidean')
-        X = svdpca(X, npca, pca_method); % to make pdist faster
+        if ~strcmp(pca_method, 'none')
+            X = svdpca(X, npca, pca_method); % to make pdist faster
+        end
     end
     X = squareform(pdist(X, distfun_mds));
 end
