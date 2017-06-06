@@ -26,7 +26,8 @@ function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 %   'npca' (default = 100)
 %       The number of PCA components for preprocessing the data
 %   'mds_method' (default = 'cmds_fast')
-%       Method for implementing MDS. Choices are 'cmds' (built-in matlab function), 'cmds_fast' (uses fast PCA), and 'nmmds'
+%       Method for implementing MDS. Choices are 'cmds' (built-in matlab function), 'cmds_fast' (uses fast PCA), 'nmmds' (nonmetric MDS),
+%       and 'mmds' (metric MDS)
 %   'distfun' (default = 'euclidean')
 %       The desired distance function for calculating pairwise distances on the data.
 %   'distfun_mds' (default = 'euclidean')
@@ -146,8 +147,9 @@ end
 if(isempty(DiffOp_t))
     disp 'diffusing operator'
     DiffOp_t = DiffOp^t;
-    X = DiffOp_t;
+    
 end
+X = DiffOp_t;
 
 disp 'potential recovery'
 X(X<=eps)=eps;
@@ -178,6 +180,12 @@ switch mds_method
         opt = statset('display', 'iter');
         Y_start = randmds(X, ndim);
         Y = mdscale(X, ndim, 'options', opt, 'start', Y_start);
+    % built-in MATLAB version of metric MDS
+    case 'mmds'
+        disp 'MMDS'
+        opt=statset('display', 'iter');
+        Y_start=randmds(X,ndim);
+        Y = mdscale(X,ndim,'options',opt,'Criterion','metricstress','start',Y_start);
 end
 
 disp 'done.'
