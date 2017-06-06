@@ -1,4 +1,4 @@
-function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
+function [Y, DiffOp, DiffOp_t, Aff] = phate(data, varargin)
 % Runs PHATE on input data. data must have cells on the rows and genes on the columns
 %
 % Authors: Kevin Moon, David van Dijk
@@ -39,7 +39,7 @@ function [Y, DiffOp, DiffOp_t] = phate(data, varargin)
 %   'DiffOp_t' (default = [])
 %       Same as for 'DiffOp', if the powered diffusion operator has been computed on a prior run with the desired parameters,
 %       then this option can be used to directly input the diffusion operator to save on computational time.
-%   'GsKer' (default = [])
+%   'Aff' (default = [])
 %       Kernel / affinity matrix, e.g. to embed a graph. The default ([]) is to compute one from
 %       the supplied data.
 
@@ -55,7 +55,7 @@ distfun_mds = 'euclidean';
 pca_method = 'random';
 DiffOp = [];
 DiffOp_t = [];
-GsKer = [];
+Aff = [];
 
 % get input parameters
 for i=1:length(varargin)
@@ -104,8 +104,8 @@ for i=1:length(varargin)
        DiffOp_t = lower(varargin{i+1});
     end
     % Use precomputed kernel / affinity matrix
-    if(strcmp(varargin{i},'GsKer'))
-       GsKer = lower(varargin{i+1});
+    if(strcmp(varargin{i},'Aff'))
+       Aff = lower(varargin{i+1});
     end
 end
 
@@ -114,8 +114,8 @@ disp '======= PHATE ======='
 % Check to see if precomputed DiffOp or DiffOp_t are given
 
 if(isempty(DiffOp) && isempty(DiffOp_t))
-    % check if GsKer is supplied
-    if isempty(GsKer)
+    % check if Aff is supplied
+    if isempty(Aff)
         if ~strcmp(pca_method, 'none')
             M = svdpca(data, npca, pca_method);
         else
@@ -133,14 +133,14 @@ if(isempty(DiffOp) && isempty(DiffOp_t))
         knnDST = sort(PDX);
         epsilon = knnDST(k+1,:); % bandwidth(x) = distance to k-th neighbor of x
         PDX = bsxfun(@rdivide,PDX,epsilon); % autotuning d(x,:) using epsilon(x)
-        GsKer = exp(-PDX.^a); % not really Gaussian kernel
-        GsKer = GsKer + GsKer'; % distfunetrization
+        Aff = exp(-PDX.^a); % affinity matrix
+        Aff = Aff + Aff'; % make sure it's symmetric
     end
-    DiffDeg = diag(sum(GsKer,2)); % degrees
-    DiffOp = DiffDeg^(-1)*GsKer; % row stochastic
+    DiffDeg = diag(sum(Aff,2)); % degrees
+    DiffOp = DiffDeg^(-1)*Aff; % row stochastic
 
     % Clear a bit of space for memory
-    clear GsKer PDX DiffDeg
+    clear PDX DiffDeg
 end
 
 % Check to see if pre computed DiffOp_t is given
