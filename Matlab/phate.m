@@ -8,9 +8,10 @@ function [Y, DiffOp, DiffOp_t, Aff] = phate(data, varargin)
 %       Y = the PHATE embedding
 %       DiffOp = the diffusion operator which can be used as optional input with another run
 %       DiffOp_t = DiffOp^t
+%       Aff = the affinity matrix constructed using the alpha-decaying kernel. Note that the diagonal is equal to 1 for all entries
 
 % INPUT
-%       data = data matrix. Must have cells on the rows and genes on the columns
+%       data = data matrix. Each row is a single cell (or datapoint) and each column is a gene (feature)
 % varargin:
 %   't' (default = 20)
 %       Diffusion time scale
@@ -134,7 +135,7 @@ if(isempty(DiffOp) && isempty(DiffOp_t))
         epsilon = knnDST(k+1,:); % bandwidth(x) = distance to k-th neighbor of x
         PDX = bsxfun(@rdivide,PDX,epsilon); % autotuning d(x,:) using epsilon(x)
         Aff = exp(-PDX.^a); % affinity matrix
-        Aff = Aff + Aff'; % make sure it's symmetric
+        Aff = (Aff + Aff')/2; % make sure it's symmetric
     end
     DiffDeg = diag(sum(Aff,2)); % degrees
     DiffOp = DiffDeg^(-1)*Aff; % row stochastic
