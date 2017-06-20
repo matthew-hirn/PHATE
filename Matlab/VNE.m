@@ -72,7 +72,11 @@ for i=1:length(varargin)
     end
 end
 
-M = svdpca(data, npca, pca_method);
+if ~strcmp(pca_method, 'none')
+    M = svdpca(data, npca, pca_method);
+else
+    M = data;
+end
 
 disp 'computing distances'
 PDX = squareform(pdist(M, distfun));
